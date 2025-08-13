@@ -39,6 +39,7 @@ jobs:
         with:
           name: php-app
           path: .
+          include-hidden-files: true
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,3 +70,4 @@ jobs:
           package: .
 
           
+
