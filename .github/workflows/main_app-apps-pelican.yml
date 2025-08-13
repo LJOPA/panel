@@ -22,6 +22,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
+          extensions: bcmath, curl, gd, mbstring, mysql, openssl, pdo, tokenizer, xml, zip
+          tools: composer:v2
 
       - name: Check if composer.json exists
         id: check_files
@@ -33,6 +35,17 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --no-dev --optimize-autoloader --prefer-dist --no-progress
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Install JS dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -70,4 +83,5 @@ jobs:
           package: .
 
           
+
 
