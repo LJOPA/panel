@@ -11,12 +11,12 @@ use App\Services\Nodes\NodeJWTService;
 use App\Services\Servers\GetUserPermissionsService;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Arr;
-use Livewire\Attributes\Session;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Session;
 
 class ServerConsole extends Widget
 {
-    protected static string $view = 'filament.components.server-console';
+    protected string $view = 'filament.components.server-console';
 
     protected int|string|array $columnSpan = 'full';
 
@@ -121,11 +121,11 @@ class ServerConsole extends Widget
 
         foreach ($data as $key => $value) {
             $cacheKey = "servers.{$this->server->id}.$key";
-            $data = cache()->get($cacheKey, []);
+            $cachedStats = cache()->get($cacheKey, []);
 
-            $data[$timestamp] = $value;
+            $cachedStats[$timestamp] = $value;
 
-            cache()->put($cacheKey, $data, now()->addMinute());
+            cache()->put($cacheKey, array_slice($cachedStats, -120), now()->addMinute());
         }
     }
 
@@ -133,8 +133,8 @@ class ServerConsole extends Widget
     public function websocketError(): void
     {
         AlertBanner::make('websocket_error')
-            ->title('Could not connect to websocket!')
-            ->body('Check your browser console for more details.')
+            ->title(trans('server/console.websocket_error.title'))
+            ->body(trans('server/console.websocket_error.body'))
             ->danger()
             ->send();
     }

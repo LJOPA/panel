@@ -2,8 +2,8 @@
 
 namespace App\Transformers\Api\Client;
 
-use App\Models\User;
 use App\Models\ActivityLog;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use League\Fractal\Resource\ResourceAbstract;
 
@@ -26,7 +26,6 @@ class ActivityLogTransformer extends BaseClientTransformer
             // the front-end for each entry to improve rendering performance since there
             // is nothing else sufficiently unique to key off at this point.
             'id' => sha1((string) $model->id),
-            'batch' => $model->batch,
             'event' => $model->event,
             'is_api' => !is_null($model->api_key_id),
             'ip' => $this->canViewIP($model->actor) ? $model->ip : null,

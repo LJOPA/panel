@@ -11,9 +11,11 @@ return [
     'name' => 'Name',
     'cron' => 'Cron',
     'status' => 'Status',
-    'inactive' => 'Inactive',
-    'processing' => 'Processing',
-    'active' => 'Active',
+    'schedule_status' => [
+        'inactive' => 'Inactive',
+        'processing' => 'Processing',
+        'active' => 'Active',
+    ],
     'no_tasks' => 'No Tasks',
     'run_now' => 'Run Now',
     'online_only' => 'Only When Online',
@@ -29,6 +31,8 @@ return [
 
     'cron_body' => 'Please keep in mind that the cron inputs below always assume UTC.',
     'cron_timezone' => 'Next run in your timezone (:timezone): <b> :next_run </b>',
+
+    'invalid' => 'Invalid',
 
     'time' => [
         'minute' => 'Minute',
@@ -73,7 +77,8 @@ return [
         'action' => 'Action',
         'payload' => 'Payload',
         'time_offset' => 'Time Offset',
-        'seconds' => 'Seconds',
+        'first_task' => 'First Task',
+        'seconds' => 'Second|Seconds',
         'continue_on_failure' => 'Continue On Failure',
 
         'actions' => [
@@ -104,4 +109,13 @@ return [
 
     'notification_invalid_cron' => 'The cron data provided does not evaluate to a valid expression',
 
+    'import_action' => [
+        'file' => 'File',
+        'url' => 'URL',
+        'schedule_help' => 'This should be the raw .json file ( schedule-daily-restart.json )',
+        'url_help' => 'URLs must point directly to the raw .json file',
+        'add_url' => 'New URL',
+        'import_failed' => 'Import Failed',
+        'import_success' => 'Import Success',
+    ],
 ];

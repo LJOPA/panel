@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands\Schedule;
 
-use Illuminate\Console\Command;
 use App\Models\Schedule;
-use Illuminate\Database\Eloquent\Builder;
 use App\Services\Schedules\ProcessScheduleService;
+use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
 use Throwable;
 
 class ProcessRunnableCommand extends Command
@@ -64,7 +64,7 @@ class ProcessRunnableCommand extends Command
         } catch (Throwable $exception) {
             logger()->error($exception, ['schedule_id' => $schedule->id]);
 
-            $this->error(trans('commands.schedule.process.no_tasks') . " #$schedule->id: " . $exception->getMessage());
+            $this->error(trans('commands.schedule.process.error_message', ['schedules' => " #$schedule->id: " . $exception->getMessage()]));
         }
     }
 }
